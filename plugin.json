@@ -6,14 +6,36 @@
   "info": {
     "description": "A status panel that displays service health information similar to Uptime Kuma",
     "author": {
-      "name": "Kevin Stellmacher"
+      "name": "Kevin Stellmacher",
+      "email": "kevin@example.com",
+      "url": "https://github.com/Perseus985"
     },
     "keywords": ["status", "uptime", "health", "monitoring"],
     "version": "1.0.0",
-    "updated": "2025-09-22"
+    "updated": "2025-09-22",
+    "logos": {
+      "small": "img/logo.png",
+      "large": "img/logo.png"
+    },
+    "links": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/Perseus985/Minimal-Status-Panel"
+      }
+    ]
   },
   "dependencies": {
     "grafanaDependency": ">=9.0.0",
     "plugins": []
-  }
+  },
+  "backend": false,
+  "executable": "",
+  "state": "stable",
+  "signature": "community",
+  "signatureType": "",
+  "signatureOrg": "",
+  "rootUrls": [
+    "https://github.com/Perseus985/Minimal-Status-Panel",
+    "https://grafana.com"
+  ]
 }

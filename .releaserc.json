@@ -24,7 +24,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "npm run build && cd dist && zip -r ../minimal-status-panel-${nextRelease.version}.zip . && cd .. && sha256sum minimal-status-panel-${nextRelease.version}.zip > checksums.txt"
+        "prepareCmd": "npm run build && if [ -n \"$GRAFANA_ACCESS_POLICY_TOKEN\" ]; then npm run sign; fi && cd dist && zip -r ../minimal-status-panel-${nextRelease.version}.zip . && cd .. && sha256sum minimal-status-panel-${nextRelease.version}.zip > checksums.txt"
       }
     ],
     [
