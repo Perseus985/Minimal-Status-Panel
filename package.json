@@ -13,7 +13,7 @@
     "e2e": "npm exec playwright test",
     "e2e:update": "npm exec playwright test --update-snapshots",
     "server": "docker-compose up --build",
-    "sign": "npx --yes @grafana/sign-plugin@latest",
+    "sign": "npx --yes @grafana/sign-plugin@latest --rootUrls https://stellmacher.grafana.net",
     "semantic-release": "semantic-release"
   },
   "repository": {

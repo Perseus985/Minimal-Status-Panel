@@ -29,13 +29,6 @@
     "plugins": []
   },
   "backend": false,
-  "executable": "",
   "state": "stable",
-  "signature": "community",
-  "signatureType": "",
-  "signatureOrg": "",
-  "rootUrls": [
-    "https://github.com/Perseus985/Minimal-Status-Panel",
-    "https://grafana.com"
-  ]
+  "signature": "community"
 }
