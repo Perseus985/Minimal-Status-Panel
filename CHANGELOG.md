@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.1.0...v1.1.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* linting errors ([6402e45](https://github.com/Perseus985/Minimal-Status-Panel/commit/6402e4528cedcd371cfff5390b4e4f914f11e41a))
+* linting problems and change renovate conf to develop branch and not main ([605be00](https://github.com/Perseus985/Minimal-Status-Panel/commit/605be00607e71be9d592bc5529cfa37a97e1af96))
+* testing ([ab8efad](https://github.com/Perseus985/Minimal-Status-Panel/commit/ab8efad4ef3ffe86bfc75d1c38c778272a1b38bd))
+
 # [1.1.0](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.0.3...v1.1.0) (2025-09-22)
 
 
