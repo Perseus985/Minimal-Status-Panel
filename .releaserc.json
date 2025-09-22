@@ -24,7 +24,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "npm run build && cd dist && zip -r ../uptime-kuma-status-panel-${nextRelease.version}.zip . && cd .. && sha256sum uptime-kuma-status-panel-${nextRelease.version}.zip > checksums.txt"
+        "prepareCmd": "npm run build && cd dist && zip -r ../minimal-status-panel-${nextRelease.version}.zip . && cd .. && sha256sum minimal-status-panel-${nextRelease.version}.zip > checksums.txt"
       }
     ],
     [
@@ -32,7 +32,7 @@
       {
         "assets": [
           {
-            "path": "uptime-kuma-status-panel-*.zip",
+            "path": "minimal-status-panel-*.zip",
             "label": "Plugin Release (${nextRelease.version})"
           },
           {
@@ -40,7 +40,7 @@
             "label": "Checksums"
           }
         ],
-        "releaseBodyTemplate": "## Uptime Kuma Status Panel v${nextRelease.version}\n\n### 📦 Installation\n\n1. Download the `uptime-kuma-status-panel-${nextRelease.version}.zip` file\n2. Extract it to your Grafana plugins directory\n3. Restart Grafana\n4. Enable the plugin in your Grafana configuration\n\n### ✨ Features\n\n- Beautiful Uptime Kuma-style service status cards\n- Minimal and Full display modes\n- Interactive heartbeat bars with hover timestamps\n- Prometheus instance filtering\n- Real-time data integration\n- Custom service name mapping\n\n### 🛠️ Requirements\n\n- Grafana 9.0.0 or later\n- Prometheus with Blackbox Exporter (recommended)\n\n### 📋 Checksums\n\nSee the `checksums.txt` file for SHA256 checksums.\n\n---\n\n${nextRelease.notes}"
+        "releaseBodyTemplate": "## Minimal Status Panel v${nextRelease.version}\n\n### 📦 Installation\n\n1. Download the `minimal-status-panel-${nextRelease.version}.zip` file\n2. Extract it to your Grafana plugins directory\n3. Restart Grafana\n4. Enable the plugin in your Grafana configuration\n\n### ✨ Features\n\n- Beautiful service status cards with clean design\n- Minimal and Full display modes\n- Interactive heartbeat bars with hover timestamps\n- Prometheus instance filtering\n- Real-time data integration\n- Custom service name mapping\n\n### 🛠️ Requirements\n\n- Grafana 9.0.0 or later\n- Prometheus with Blackbox Exporter (recommended)\n\n### 📋 Checksums\n\nSee the `checksums.txt` file for SHA256 checksums.\n\n---\n\n${nextRelease.notes}"
       }
     ],
     [

@@ -1,6 +1,6 @@
 # Minimal Status Panel
 
-A beautiful Grafana panel plugin that displays service status information in the style of Uptime Kuma. Perfect for monitoring your services with a clean, intuitive interface.
+A beautiful Grafana panel plugin that displays service status information with a clean, modern design. Perfect for monitoring your services with an intuitive interface.
 
 [![CI/CD Pipeline](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/ci.yml/badge.svg)](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/ci.yml)
 [![Release](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/release.yml/badge.svg)](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/release.yml)
@@ -10,7 +10,7 @@ A beautiful Grafana panel plugin that displays service status information in the
 
 ## ✨ Features
 
-- **🎨 Uptime Kuma Style**: Clean, modern interface inspired by Uptime Kuma
+- **🎨 Clean Design**: Modern, intuitive interface for status monitoring
 - **📊 Two Display Modes**: 
   - **Minimal**: Service name, status, and heartbeat bar only
   - **Full**: Complete view with response times, uptime stats, and certificate info
@@ -34,7 +34,7 @@ A beautiful Grafana panel plugin that displays service status information in the
 2. **Extract the ZIP file** to your Grafana plugins directory:
    ```bash
    # Extract to Grafana plugins directory
-   unzip uptime-kuma-status-panel-*.zip -d /var/lib/grafana/plugins/uptime-kuma-status-panel/
+   unzip minimal-status-panel-*.zip -d /var/lib/grafana/plugins/minimal-status-panel/
    ```
 3. **Restart Grafana** and enable the plugin in your configuration
 
@@ -43,7 +43,7 @@ A beautiful Grafana panel plugin that displays service status information in the
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Perseus985/Minimal-Status-Panel.git
-   cd uptime-kuma-status-panel
+   cd minimal-status-panel
    ```
 
 2. **Build the plugin**:
@@ -54,7 +54,7 @@ A beautiful Grafana panel plugin that displays service status information in the
 
 3. **Copy to Grafana plugins directory**:
    ```bash
-   cp -r dist /var/lib/grafana/plugins/uptime-kuma-status-panel
+   cp -r dist /var/lib/grafana/plugins/minimal-status-panel
    ```
 
 4. **Restart Grafana** and enable the plugin in your configuration
@@ -76,7 +76,7 @@ Access Grafana at http://localhost:3001 (admin/admin)
 ### Creating a Panel
 
 1. **Add a new panel** to your dashboard
-2. **Select "Uptime Kuma Status Panel"** as the visualization type
+2. **Select "Minimal Status Panel"** as the visualization type
 3. **Configure your data source** (Prometheus recommended)
 4. **Add your query**, for example:
    ```promql

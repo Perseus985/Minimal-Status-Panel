@@ -15,8 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2024-09-22
 
 ### Added
-- 🎉 Initial release of Uptime Kuma Status Panel
-- ✨ Beautiful Uptime Kuma-style service status cards
+- 🎉 Initial release of Minimal Status Panel
+- ✨ Beautiful, clean service status cards
 - 📊 Two display modes: Minimal and Full view
 - 💫 Interactive heartbeat bars with hover timestamps
 - 🔍 Prometheus instance filtering support
