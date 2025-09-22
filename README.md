@@ -31,14 +31,14 @@ A beautiful Grafana panel plugin that displays service status information with a
 Clean, compact display showing just the essentials:
 
 <div align="center">
-  <img src="img/minimal-ex.png" alt="Minimal View Example" width="600">
+  <img src="img/Minimal-ex.png" alt="Minimal View Example" width="600">
 </div>
 
 #### **Full View**
 Complete monitoring dashboard with detailed statistics:
 
 <div align="center">
-  <img src="img/full-ex.png" alt="Full View Example" width="600">
+  <img src="img/Full-ex.png" alt="Full View Example" width="600">
 </div>
 
 ## 🚀 Quick Start
