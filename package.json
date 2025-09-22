@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Perseus985/uptime-kuma-panel.git"
+    "url": "git+https://github.com/Perseus985/Minimal-Status-Panel.git"
   },
   "author": "Your Name",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Perseus985/uptime-kuma-panel/issues"
+    "url": "https://github.com/Perseus985/Minimal-Status-Panel/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",

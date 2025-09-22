@@ -2,11 +2,11 @@
 
 A beautiful Grafana panel plugin that displays service status information in the style of Uptime Kuma. Perfect for monitoring your services with a clean, intuitive interface.
 
-[![CI/CD Pipeline](https://github.com/yourusername/uptime-kuma-status-panel/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/uptime-kuma-status-panel/actions/workflows/ci.yml)
-[![Release](https://github.com/yourusername/uptime-kuma-status-panel/actions/workflows/release.yml/badge.svg)](https://github.com/yourusername/uptime-kuma-status-panel/actions/workflows/release.yml)
+[![CI/CD Pipeline](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/ci.yml/badge.svg)](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/ci.yml)
+[![Release](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/release.yml/badge.svg)](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/release.yml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
-[![Latest Release](https://img.shields.io/github/v/release/yourusername/uptime-kuma-status-panel)](https://github.com/yourusername/uptime-kuma-status-panel/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/yourusername/uptime-kuma-status-panel/total)](https://github.com/yourusername/uptime-kuma-status-panel/releases)
+[![Latest Release](https://img.shields.io/github/v/release/Perseus985/Minimal-Status-Panel)](https://github.com/Perseus985/Minimal-Status-Panel/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/Perseus985/Minimal-Status-Panel/total)](https://github.com/Perseus985/Minimal-Status-Panel/releases)
 
 ## ✨ Features
 
@@ -30,7 +30,7 @@ A beautiful Grafana panel plugin that displays service status information in the
 
 #### Option 1: Download Pre-built Release (Recommended)
 
-1. **Download the latest release** from the [Releases page](https://github.com/yourusername/uptime-kuma-status-panel/releases/latest)
+1. **Download the latest release** from the [Releases page](https://github.com/Perseus985/Minimal-Status-Panel/releases/latest)
 2. **Extract the ZIP file** to your Grafana plugins directory:
    ```bash
    # Extract to Grafana plugins directory
@@ -42,7 +42,7 @@ A beautiful Grafana panel plugin that displays service status information in the
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/uptime-kuma-status-panel.git
+   git clone https://github.com/Perseus985/Minimal-Status-Panel.git
    cd uptime-kuma-status-panel
    ```
 
@@ -217,7 +217,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🐛 Issues
 
-Found a bug or have a feature request? Please [open an issue](https://github.com/yourusername/uptime-kuma-status-panel/issues).
+Found a bug or have a feature request? Please [open an issue](https://github.com/Perseus985/Minimal-Status-Panel/issues).
 
 ## ⭐ Show Your Support
 
