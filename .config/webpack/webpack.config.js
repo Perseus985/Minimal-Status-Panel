@@ -89,7 +89,7 @@ module.exports = (env) => ({
         { from: 'README.md', to: '.' },
         { from: 'CHANGELOG.md', to: '.', noErrorOnMissing: true },
         { from: 'LICENSE', to: '.' },
-        { from: 'src/img/*', to: 'img/', noErrorOnMissing: true },
+        { from: 'img/*', to: 'img/[name][ext]', noErrorOnMissing: true },
       ],
     }),
 
