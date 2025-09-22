@@ -111,12 +111,20 @@ function extractServiceName(instance: string): string {
       const url = new URL(instance);
       const hostname = url.hostname;
       
-      // Convert common domains to readable names
-      if (hostname.includes('google.com')) return 'Google';
-      if (hostname.includes('github.com')) return 'GitHub';
+      /// Convert common domains to readable names
+      if (hostname.includes('google.com')) {
+        return 'Google';
+      }
+      if (hostname.includes('github.com')) {
+        return 'GitHub';
+      }
       if (hostname.includes('httpbin.org')) {
-        if (instance.includes('200')) return 'HTTPBin Success Test';
-        if (instance.includes('500')) return 'HTTPBin Error Test';
+        if (instance.includes('200')) {
+          return 'HTTPBin Success Test';
+        }
+        if (instance.includes('500')) {
+          return 'HTTPBin Error Test';
+        }
         return 'HTTPBin Test';
       }
       
