@@ -32,10 +32,10 @@ services:
       - "3001:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=uptime-kuma-status-panel
+      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=minimal-status-panel
       - GF_INSTALL_PLUGINS=
     volumes:
-      - ./dist:/var/lib/grafana/plugins/uptime-kuma-status-panel
+      - ./dist:/var/lib/grafana/plugins/minimal-status-panel
       - ./monitoring/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
       - grafana-storage:/var/lib/grafana
     depends_on:

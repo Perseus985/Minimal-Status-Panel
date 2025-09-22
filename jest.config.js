@@ -1,9 +1,25 @@
-const standard = require('@grafana/toolkit/src/config/jest.plugin.config');
-
 module.exports = {
-  ...standard.jestConfig(),
+  preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  moduleNameMapping: {
-    '\\.(css|scss|sass)$': 'identity-obj-proxy',
+  roots: ['<rootDir>/src'],
+  testMatch: [
+    '**/__tests__/**/*.+(ts|tsx|js)',
+    '**/*.(test|spec).+(ts|tsx|js)',
+  ],
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
+  ],
+  moduleNameMapper: {
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+  },
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(@grafana/.*\\.mjs$))',
+  ],
 };

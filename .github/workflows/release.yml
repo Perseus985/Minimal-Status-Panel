@@ -1,0 +1,176 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run tests
+      run: npm run test:ci
+      
+    - name: Build plugin
+      run: npm run build
+      
+    - name: Get version from tag
+      id: version
+      run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+    - name: Create plugin archive
+      run: |
+        cd dist
+        zip -r ../uptime-kuma-status-panel-${{ steps.version.outputs.version }}.zip .
+        cd ..
+        
+    - name: Generate checksums
+      run: |
+        sha256sum uptime-kuma-status-panel-${{ steps.version.outputs.version }}.zip > checksums.txt
+        
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ steps.version.outputs.version }}
+        body: |
+          ## Uptime Kuma Status Panel v${{ steps.version.outputs.version }}
+          
+          ### 📦 Installation
+          
+          1. Download the `uptime-kuma-status-panel-${{ steps.version.outputs.version }}.zip` file
+          2. Extract it to your Grafana plugins directory
+          3. Restart Grafana
+          4. Enable the plugin in your Grafana configuration
+          
+          ### ✨ Features
+          
+          - Beautiful Uptime Kuma-style service status cards
+          - Minimal and Full display modes
+          - Interactive heartbeat bars with hover timestamps
+          - Prometheus instance filtering
+          - Real-time data integration
+          
+          ### 🛠️ Requirements
+          
+          - Grafana 9.0.0 or later
+          - Prometheus with Blackbox Exporter (recommended)
+          
+          ### 📋 Checksums
+          
+          See the `checksums.txt` file for SHA256 checksums.
+          
+        draft: false
+        prerelease: false
+        
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./uptime-kuma-status-panel-${{ steps.version.outputs.version }}.zip
+        asset_name: uptime-kuma-status-panel-${{ steps.version.outputs.version }}.zip
+        asset_content_type: application/zip
+        
+    - name: Upload Checksums
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./checksums.txt
+        asset_name: checksums.txt
+        asset_content_type: text/plain
+
+  sign:
+    name: Sign Plugin (Optional)
+    runs-on: ubuntu-latest
+    needs: release
+    if: secrets.GRAFANA_API_KEY != ''
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build plugin
+      run: npm run build
+      
+    - name: Sign plugin
+      run: npm run sign
+      env:
+        GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }}
+        
+    - name: Get version from tag
+      id: version
+      run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+    - name: Create signed plugin archive
+      run: |
+        cd dist
+        zip -r ../uptime-kuma-status-panel-${{ steps.version.outputs.version }}-signed.zip .
+        cd ..
+        
+    - name: Generate signed checksums
+      run: |
+        sha256sum uptime-kuma-status-panel-${{ steps.version.outputs.version }}-signed.zip > checksums-signed.txt
+        
+    - name: Get release upload URL
+      id: get_release
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const tag = context.ref.replace('refs/tags/', '');
+          const release = await github.rest.repos.getReleaseByTag({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            tag: tag
+          });
+          return release.data.upload_url;
+        
+    - name: Upload Signed Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release.outputs.result }}
+        asset_path: ./uptime-kuma-status-panel-${{ steps.version.outputs.version }}-signed.zip
+        asset_name: uptime-kuma-status-panel-${{ steps.version.outputs.version }}-signed.zip
+        asset_content_type: application/zip
+        
+    - name: Upload Signed Checksums
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.get_release.outputs.result }}
+        asset_path: ./checksums-signed.txt
+        asset_name: checksums-signed.txt
+        asset_content_type: text/plain

@@ -66,5 +66,14 @@ export const plugin = new PanelPlugin<StatusPanelOptions>(StatusPanel).setPanelO
         min: 5,
         max: 300,
       },
+    })
+    .addTextInput({
+      path: 'customNames',
+      name: 'Custom Service Names',
+      description: 'JSON mapping of instance URLs to custom names. Example: {"https://google.com":"Google","https://github.com":"GitHub"}',
+      defaultValue: '{}',
+      settings: {
+        placeholder: '{"https://google.com":"Google","https://github.com":"GitHub"}',
+      },
     });
 });

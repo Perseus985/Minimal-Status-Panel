@@ -72,35 +72,44 @@ export const StatusIndicator: React.FC<StatusIndicatorProps> = ({ service, optio
     );
   }
 
-  // Generate heartbeat data with realistic up/down pattern
-  const generateHeartbeatData = () => {
-    const data = [];
-    const now = Date.now();
-    
-    for (let i = 0; i < 50; i++) {
-      const timeAgo = (50 - i) * 60 * 1000; // Each bar = 1 minute ago
-      const timestamp = new Date(now - timeAgo);
+  // Use real heartbeat data from Prometheus or fallback to mock data
+  const getHeartbeatDisplayData = () => {
+    if (service.heartbeatData && service.heartbeatData.length > 0) {
+      // Use real data from Prometheus
+      const maxBars = 50;
+      const data = service.heartbeatData.slice(-maxBars); // Take last 50 data points
       
-      // Create pattern: mostly up, with some down periods
-      let status = 'up';
-      if (service.status === 'down' && i >= 45) {
-        status = 'down'; // Recent failure
-      } else if (i >= 20 && i <= 25) {
-        status = 'down'; // Past outage
-      } else if (i >= 10 && i <= 12) {
-        status = 'down'; // Brief outage
+      return data.map(beat => ({
+        status: beat.status,
+        timestamp: new Date(beat.timestamp).toLocaleTimeString(),
+        color: beat.status === 'up' ? getStatusColor('up', theme) : getStatusColor('down', theme),
+        value: beat.value
+      }));
+    } else {
+      // Fallback: generate simple pattern based on current status
+      const data = [];
+      const now = Date.now();
+      
+      for (let i = 0; i < 50; i++) {
+        const timestamp = new Date(now - (50 - i) * 60 * 1000);
+        // Simple pattern: mostly current status with some variation
+        let status = service.status === 'up' ? 'up' : 'down';
+        if (service.status === 'up' && i >= 10 && i <= 12) {
+          status = 'down'; // Brief outage
+        }
+        
+        data.push({
+          status,
+          timestamp: timestamp.toLocaleTimeString(),
+          color: status === 'up' ? getStatusColor('up', theme) : getStatusColor('down', theme),
+          value: status === 'up' ? 1 : 0
+        });
       }
-      
-      data.push({
-        status,
-        timestamp: timestamp.toLocaleTimeString(),
-        color: status === 'up' ? getStatusColor('up', theme) : getStatusColor('down', theme)
-      });
+      return data;
     }
-    return data;
   };
 
-  const heartbeatData = generateHeartbeatData();
+  const heartbeatDisplayData = getHeartbeatDisplayData();
 
   // Simple Uptime Kuma style card
   return (
@@ -126,7 +135,7 @@ export const StatusIndicator: React.FC<StatusIndicatorProps> = ({ service, optio
       {/* Heartbeat Bar with Hover Tooltips */}
       <div className={styles.heartbeatSection}>
         <div className={styles.heartbeatBar}>
-          {heartbeatData.map((beat, i) => (
+          {heartbeatDisplayData.map((beat, i) => (
             <div
               key={i}
               className={styles.heartbeatBlock}
@@ -138,7 +147,12 @@ export const StatusIndicator: React.FC<StatusIndicatorProps> = ({ service, optio
             />
           ))}
         </div>
-        <div className={styles.heartbeatLabel}>Check every 60 seconds</div>
+        <div className={styles.heartbeatLabel}>
+          {service.heartbeatData ? 
+            `Showing ${heartbeatDisplayData.length} data points from dashboard timerange` : 
+            'Check every 60 seconds (fallback data)'
+          }
+        </div>
       </div>
 
       {/* Stats Section - only show in full mode */}

@@ -8,6 +8,13 @@ export interface StatusPanelOptions {
   showResponseTime: boolean;
   maxItems: number;
   refreshInterval: number;
+  customNames: string;
+}
+
+export interface HeartbeatData {
+  timestamp: number;
+  status: 'up' | 'down' | 'unknown';
+  value: number;
 }
 
 export interface ServiceStatus {
@@ -18,6 +25,7 @@ export interface ServiceStatus {
   url?: string;
   uptime?: number;
   message?: string;
+  heartbeatData?: HeartbeatData[];
 }
 
 export interface StatusPanelProps {

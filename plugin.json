@@ -1,8 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
   "type": "panel",
-  "name": "Uptime Kuma Status Panel",
-  "id": "uptime-kuma-status-panel",
+  "name": "Minimal Status Panel",
+  "id": "minimal-status-panel",
   "info": {
     "description": "A status panel that displays service health information similar to Uptime Kuma",
     "author": {

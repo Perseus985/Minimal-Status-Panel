@@ -16,7 +16,7 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({ options, data, width, 
         return [];
       }
       console.log('Data series:', data.series);
-      const parsed = parseDataFrames(data.series);
+      const parsed = parseDataFrames(data.series, options.customNames);
       console.log('Parsed services:', parsed);
       return parsed;
     } catch (error) {
