@@ -12,18 +12,15 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({ options, data, width, 
   const services = useMemo(() => {
     try {
       if (!data || !data.series || data.series.length === 0) {
-        console.log('No data series available');
         return [];
       }
-      console.log('Data series:', data.series);
       const parsed = parseDataFrames(data.series, options.customNames);
-      console.log('Parsed services:', parsed);
       return parsed;
     } catch (error) {
       console.error('Error parsing data frames:', error);
       return [];
     }
-  }, [data]);
+  }, [data, options.customNames]);
 
   const limitedServices = services.slice(0, options.maxItems || 20);
 

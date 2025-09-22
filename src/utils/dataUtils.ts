@@ -47,7 +47,7 @@ export function parseDataFrames(series: DataFrame[], customNamesJson?: string): 
       const lastTimestamp = timeField.values.get(lastIndex);
 
       // Extract all heartbeat data from the time series
-      const heartbeatData: import('../types').HeartbeatData[] = [];
+      const heartbeatData: Array<import('../types').HeartbeatData> = [];
       for (let i = 0; i < frame.length; i++) {
         const value = valueField.values.get(i);
         const timestamp = timeField.values.get(i);
@@ -89,7 +89,7 @@ function createTestServices(): ServiceStatus[] {
   
   // Create mock heartbeat data for the last 50 data points
   const createMockHeartbeat = (pattern: string) => {
-    const data: import('../types').HeartbeatData[] = [];
+    const data: Array<import('../types').HeartbeatData> = [];
     for (let i = 0; i < 50; i++) {
       const timestamp = now - (50 - i) * 60 * 1000; // 1 minute intervals
       let value = 1; // Default to up
@@ -171,10 +171,18 @@ function extractServiceName(instance: string, labels?: Record<string, string>, c
   // First, try to use common service name labels
   if (labels) {
     // Check for common service name labels
-    if (labels.service_name) return labels.service_name;
-    if (labels.service) return labels.service;
-    if (labels.name) return labels.name;
-    if (labels.job && labels.job !== 'blackbox' && labels.job !== 'prometheus') return labels.job;
+    if (labels.service_name) {
+      return labels.service_name;
+    }
+    if (labels.service) {
+      return labels.service;
+    }
+    if (labels.name) {
+      return labels.name;
+    }
+    if (labels.job && labels.job !== 'blackbox' && labels.job !== 'prometheus') {
+      return labels.job;
+    }
   }
 
   // Try to extract a readable name from the instance
@@ -185,11 +193,19 @@ function extractServiceName(instance: string, labels?: Record<string, string>, c
       const hostname = url.hostname;
       
       // Convert common domains to readable names
-      if (hostname.includes('google.com')) return 'Google';
-      if (hostname.includes('github.com')) return 'GitHub';
+      if (hostname.includes('google.com')) {
+        return 'Google';
+      }
+      if (hostname.includes('github.com')) {
+        return 'GitHub';
+      }
       if (hostname.includes('httpbin.org')) {
-        if (instance.includes('200')) return 'HTTPBin Success Test';
-        if (instance.includes('500')) return 'HTTPBin Error Test';
+        if (instance.includes('200')) {
+          return 'HTTPBin Success Test';
+        }
+        if (instance.includes('500')) {
+          return 'HTTPBin Error Test';
+        }
         return 'HTTPBin Test';
       }
       
