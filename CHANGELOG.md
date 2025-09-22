@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.0.2...v1.0.3) (2025-09-22)
+
+
+### Bug Fixes
+
+* constrain React to v18 and Grafana to v10 for compatibility ([ec7ad25](https://github.com/Perseus985/Minimal-Status-Panel/commit/ec7ad25b50a44b674de9b905fdeb5f075bb60e60))
+
 ## [1.0.2](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.0.1...v1.0.2) (2025-09-22)
 
 
