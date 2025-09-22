@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.0.1...v1.0.2) (2025-09-22)
+
+
+### Bug Fixes
+
+* rebranding ([0950e40](https://github.com/Perseus985/Minimal-Status-Panel/commit/0950e4085791e12fc11d57f3fd1764b6352c905d))
+
 ## [1.0.1](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.0.0...v1.0.1) (2025-09-22)
 
 
