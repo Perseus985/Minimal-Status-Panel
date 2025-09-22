@@ -23,14 +23,18 @@
       "matchPackagePatterns": ["^@grafana/"],
       "schedule": ["before 6am on monday"],
       "automerge": false,
-      "reviewers": ["team:maintainers"]
+      "reviewers": ["team:maintainers"],
+      "allowedVersions": "^10.0.0",
+      "description": "Keep Grafana packages at v10 for React 18 compatibility"
     },
     {
       "groupName": "React ecosystem",
       "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"],
       "schedule": ["before 6am on monday"],
       "automerge": false,
-      "reviewers": ["team:maintainers"]
+      "reviewers": ["team:maintainers"],
+      "allowedVersions": "^18.0.0",
+      "description": "Keep React at v18 for Grafana compatibility"
     },
     {
       "groupName": "Webpack and loaders",
@@ -85,6 +89,13 @@
       "schedule": ["before 6am on monday"],
       "reviewers": ["team:maintainers"],
       "prPriority": 10
+    },
+    {
+      "matchPackageNames": ["react", "react-dom"],
+      "matchCurrentVersion": "^18.0.0",
+      "matchUpdateTypes": ["major"],
+      "enabled": false,
+      "description": "Block React 19 - incompatible with Grafana"
     }
   ],
   "vulnerabilityAlerts": {
