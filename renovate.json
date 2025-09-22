@@ -4,7 +4,9 @@
     "config:recommended",
     ":semanticCommitTypeAll(chore)"
   ],
-  "baseBranches": ["develop"],
+  "baseBranchPatterns": [
+    "develop"
+  ],
   "timezone": "Europe/Berlin",
   "schedule": [
     "before 6am on monday"
@@ -21,94 +23,165 @@
   "packageRules": [
     {
       "groupName": "Grafana packages",
-      "matchPackagePatterns": ["^@grafana/"],
-      "schedule": ["before 6am on monday"],
+      "schedule": [
+        "before 6am on monday"
+      ],
       "automerge": false,
-      "reviewers": ["team:maintainers"],
+      "reviewers": [
+        "team:maintainers"
+      ],
       "allowedVersions": "^10.0.0",
-      "description": "Keep Grafana packages at v10 for React 18 compatibility"
+      "description": "Keep Grafana packages at v10 for React 18 compatibility",
+      "matchPackageNames": [
+        "/^@grafana//"
+      ]
     },
     {
       "groupName": "React ecosystem",
-      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"],
-      "schedule": ["before 6am on monday"],
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom"
+      ],
+      "schedule": [
+        "before 6am on monday"
+      ],
       "automerge": false,
-      "reviewers": ["team:maintainers"],
+      "reviewers": [
+        "team:maintainers"
+      ],
       "allowedVersions": "^18.0.0",
       "description": "Keep React at v18 for Grafana compatibility"
     },
     {
       "groupName": "Webpack and loaders",
-      "matchPackagePatterns": ["webpack", "loader", "babel"],
-      "schedule": ["before 6am on monday"],
-      "automerge": false
+      "schedule": [
+        "before 6am on monday"
+      ],
+      "automerge": false,
+      "matchPackageNames": [
+        "/webpack/",
+        "/loader/",
+        "/babel/"
+      ]
     },
     {
       "groupName": "ESLint and Prettier",
-      "matchPackageNames": ["eslint", "prettier"],
-      "matchPackagePatterns": ["eslint-", "prettier-"],
-      "schedule": ["before 6am on monday"],
+      "matchPackageNames": [
+        "eslint",
+        "prettier",
+        "/eslint-/",
+        "/prettier-/"
+      ],
+      "schedule": [
+        "before 6am on monday"
+      ],
       "automerge": true,
       "automergeType": "pr"
     },
     {
       "groupName": "Testing dependencies",
-      "matchPackageNames": ["jest", "@testing-library/react", "@testing-library/jest-dom", "ts-jest"],
-      "matchPackagePatterns": ["jest-", "@jest/", "@testing-library/"],
-      "schedule": ["before 6am on monday"],
+      "matchPackageNames": [
+        "jest",
+        "@testing-library/react",
+        "@testing-library/jest-dom",
+        "ts-jest",
+        "/jest-/",
+        "/@jest//",
+        "/@testing-library//"
+      ],
+      "schedule": [
+        "before 6am on monday"
+      ],
       "automerge": true,
       "automergeType": "pr"
     },
     {
       "groupName": "TypeScript and types",
-      "matchPackageNames": ["typescript"],
-      "matchPackagePatterns": ["^@types/"],
-      "schedule": ["before 6am on monday"],
+      "matchPackageNames": [
+        "typescript",
+        "/^@types//"
+      ],
+      "schedule": [
+        "before 6am on monday"
+      ],
       "automerge": true,
       "automergeType": "pr"
     },
     {
       "groupName": "Semantic Release",
-      "matchPackageNames": ["semantic-release"],
-      "matchPackagePatterns": ["^@semantic-release/"],
-      "schedule": ["before 6am on monday"],
+      "matchPackageNames": [
+        "semantic-release",
+        "/^@semantic-release//"
+      ],
+      "schedule": [
+        "before 6am on monday"
+      ],
       "automerge": false,
-      "reviewers": ["team:maintainers"]
+      "reviewers": [
+        "team:maintainers"
+      ]
     },
     {
       "groupName": "Minor and patch dependencies",
-      "matchUpdateTypes": ["minor", "patch"],
-      "excludePackagePatterns": ["^@grafana/", "react", "webpack", "semantic-release"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "automerge": true,
       "automergeType": "pr",
-      "schedule": ["before 6am on monday"]
+      "schedule": [
+        "before 6am on monday"
+      ],
+      "matchPackageNames": [
+        "!/^@grafana//",
+        "!/react/",
+        "!/webpack/",
+        "!/semantic-release/"
+      ]
     },
     {
       "groupName": "Major dependencies",
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "automerge": false,
-      "schedule": ["before 6am on monday"],
-      "reviewers": ["team:maintainers"],
+      "schedule": [
+        "before 6am on monday"
+      ],
+      "reviewers": [
+        "team:maintainers"
+      ],
       "prPriority": 10
     },
     {
-      "matchPackageNames": ["react", "react-dom"],
+      "matchPackageNames": [
+        "react",
+        "react-dom"
+      ],
       "matchCurrentVersion": "^18.0.0",
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "enabled": false,
       "description": "Block React 19 - incompatible with Grafana"
     }
   ],
   "vulnerabilityAlerts": {
     "enabled": true,
-    "schedule": ["at any time"],
+    "schedule": [
+      "at any time"
+    ],
     "automerge": true,
     "automergeType": "pr",
     "prPriority": 20
   },
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["before 6am on monday"],
+    "schedule": [
+      "before 6am on monday"
+    ],
     "automerge": true,
     "automergeType": "pr"
   },
@@ -116,11 +189,6 @@
   "branchConcurrentLimit": 10,
   "prHourlyLimit": 2,
   "platformAutomerge": true,
-  "requiredStatusChecks": [
-    "Test & Lint",
-    "Build & Verify Plugin",
-    "Security & Dependency Check"
-  ],
   "ignorePaths": [
     "**/node_modules/**",
     "**/dist/**",
