@@ -1,7 +1,7 @@
 # Minimal Status Panel
 
 <div align="center">
-  <img src="logo.png" alt="Minimal Status Panel Logo" width="200" height="200">
+  <img src="img/logo.png" alt="Minimal Status Panel Logo" width="200" height="200">
 </div>
 
 <br>
@@ -24,6 +24,22 @@ A beautiful Grafana panel plugin that displays service status information with a
 - **🔍 Instance Filtering**: Filter services using Prometheus query labels
 - **📈 Real-time Data**: Works with Blackbox Exporter and other Prometheus metrics
 - **🌙 Theme Support**: Automatically adapts to Grafana's light/dark themes
+
+### 📸 **Display Modes**
+
+#### **Minimal View**
+Clean, compact display showing just the essentials:
+
+<div align="center">
+  <img src="img/minimal-ex.png" alt="Minimal View Example" width="600">
+</div>
+
+#### **Full View**
+Complete monitoring dashboard with detailed statistics:
+
+<div align="center">
+  <img src="img/full-ex.png" alt="Full View Example" width="600">
+</div>
 
 ## 🚀 Quick Start
 
