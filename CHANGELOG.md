@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.1.1...v1.1.2) (2025-09-22)
+
+
+### Bug Fixes
+
+* proper logo handling in grafana for plugin ([18b1721](https://github.com/Perseus985/Minimal-Status-Panel/commit/18b1721ba08cb5b75e71169b3165a518ecbb5b21))
+
 ## [1.1.1](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.1.0...v1.1.1) (2025-09-22)
 
 
