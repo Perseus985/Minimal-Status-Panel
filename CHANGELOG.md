@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.0.0...v1.0.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* update node version ([0da38e8](https://github.com/Perseus985/Minimal-Status-Panel/commit/0da38e853825523754127460dc6882cd312704e4))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
