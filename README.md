@@ -1,5 +1,11 @@
 # Minimal Status Panel
 
+<div align="center">
+  <img src="logo.png" alt="Minimal Status Panel Logo" width="200" height="200">
+</div>
+
+<br>
+
 A beautiful Grafana panel plugin that displays service status information with a clean, modern design. Perfect for monitoring your services with an intuitive interface.
 
 [![CI/CD Pipeline](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/ci.yml/badge.svg)](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/ci.yml)
