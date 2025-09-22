@@ -27,17 +27,13 @@ describe('Data Utils', () => {
             name: 'time',
             type: FieldType.time,
             config: {},
-            values: {
-              get: (index: number) => Date.now() - (1 - index) * 60000 // 1 minute intervals
-            }
+            values: [Date.now() - 60000, Date.now()]
           },
           {
             name: 'value',
             type: FieldType.number,
             config: {},
-            values: {
-              get: (index: number) => index === 0 ? 1 : 0 // First up, second down
-            },
+            values: [1, 0],
             labels: {
               instance: 'https://example.com'
             }
@@ -67,17 +63,13 @@ describe('Data Utils', () => {
             name: 'time',
             type: FieldType.time,
             config: {},
-            values: {
-              get: () => Date.now()
-            }
+            values: [Date.now()]
           },
           {
             name: 'value',
             type: FieldType.number,
             config: {},
-            values: {
-              get: () => 1
-            },
+            values: [1],
             labels: {
               instance: 'https://example.com'
             }
