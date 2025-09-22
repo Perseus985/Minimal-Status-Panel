@@ -4,7 +4,7 @@ A beautiful Grafana panel plugin that displays service status information with a
 
 [![CI/CD Pipeline](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/ci.yml/badge.svg)](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/ci.yml)
 [![Release](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/release.yml/badge.svg)](https://github.com/Perseus985/Minimal-Status-Panel/actions/workflows/release.yml)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Latest Release](https://img.shields.io/github/v/release/Perseus985/Minimal-Status-Panel)](https://github.com/Perseus985/Minimal-Status-Panel/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Perseus985/Minimal-Status-Panel/total)](https://github.com/Perseus985/Minimal-Status-Panel/releases)
 
