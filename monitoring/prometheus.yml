@@ -1,0 +1,72 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'blackbox'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['blackbox:9115']
+
+  # HTTP endpoint monitoring
+  - job_name: 'blackbox-http'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response.
+    static_configs:
+      - targets:
+        - https://httpbin.org/status/200    # Example: Always returns 200
+        - https://httpbin.org/status/500    # Example: Always returns 500
+        - https://httpbin.org/delay/3       # Example: Slow response
+        - https://google.com                # Example: Real website
+        - https://github.com                # Example: Real website
+        - https://nonexistent-site-12345.com # Example: Down site
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115  # The blackbox exporter's real hostname:port.
+
+  # HTTPS endpoint monitoring
+  - job_name: 'blackbox-https'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+        - https://grafana.com
+        - https://prometheus.io
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115
+
+  # TCP endpoint monitoring
+  - job_name: 'blackbox-tcp'
+    metrics_path: /probe
+    params:
+      module: [tcp_connect]
+    static_configs:
+      - targets:
+        - google.com:80
+        - github.com:443
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115

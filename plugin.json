@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "panel",
+  "name": "Uptime Kuma Status Panel",
+  "id": "uptime-kuma-status-panel",
+  "info": {
+    "description": "A status panel that displays service health information similar to Uptime Kuma",
+    "author": {
+      "name": "Kevin Stellmacher"
+    },
+    "keywords": ["status", "uptime", "health", "monitoring"],
+    "version": "1.0.0",
+    "updated": "2025-09-22"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=9.0.0",
+    "plugins": []
+  }
+}
