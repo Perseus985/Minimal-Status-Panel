@@ -47,6 +47,12 @@ export const plugin = new PanelPlugin<StatusPanelOptions>(StatusPanel).setPanelO
       description: 'Display response time',
       defaultValue: true,
     })
+    .addBooleanSwitch({
+      path: 'showUrls',
+      name: 'Show URLs',
+      description: 'Display service URLs/instance links',
+      defaultValue: true,
+    })
     .addNumberInput({
       path: 'maxItems',
       name: 'Max Items',

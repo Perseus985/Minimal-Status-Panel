@@ -123,7 +123,7 @@ export const StatusIndicator: React.FC<StatusIndicatorProps> = ({ service, optio
             {service.status === 'up' ? 'Up' : service.status === 'down' ? 'Down' : service.status.charAt(0).toUpperCase() + service.status.slice(1)}
           </div>
         </div>
-        {service.url && (
+        {service.url && options.showUrls && (
           <div className={styles.serviceUrl}>
             <a href={service.url} target="_blank" rel="noopener noreferrer">
               {service.url}

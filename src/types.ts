@@ -6,6 +6,7 @@ export interface StatusPanelOptions {
   showLabels: boolean;
   showLastCheck: boolean;
   showResponseTime: boolean;
+  showUrls: boolean;
   maxItems: number;
   refreshInterval: number;
   customNames: string;

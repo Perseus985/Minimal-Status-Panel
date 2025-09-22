@@ -115,6 +115,11 @@
   "branchConcurrentLimit": 10,
   "prHourlyLimit": 2,
   "platformAutomerge": true,
+  "requiredStatusChecks": [
+    "Test & Lint",
+    "Build & Verify Plugin",
+    "Security & Dependency Check"
+  ],
   "ignorePaths": [
     "**/node_modules/**",
     "**/dist/**",

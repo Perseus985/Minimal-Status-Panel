@@ -37,11 +37,17 @@ jobs:
     - name: Run linting
       run: npm run lint
       
-    - name: Run tests
+    - name: Run tests with coverage
       run: npm run test:ci
+      
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v4
+      if: success()
+      with:
+        fail_ci_if_error: false
 
   build:
-    name: Build Plugin
+    name: Build & Verify Plugin
     runs-on: ubuntu-latest
     needs: test
     
@@ -61,12 +67,133 @@ jobs:
     - name: Build plugin
       run: npm run build
       
+    - name: Verify build output
+      run: |
+        echo "🔍 Verifying build artifacts..."
+        
+        # Check required files exist
+        if [ ! -f "dist/plugin.json" ]; then
+          echo "❌ plugin.json missing from build"
+          exit 1
+        fi
+        
+        if [ ! -f "dist/module.js" ]; then
+          echo "❌ module.js missing from build"
+          exit 1
+        fi
+        
+        # Check plugin.json is valid JSON
+        if ! jq empty dist/plugin.json; then
+          echo "❌ plugin.json is not valid JSON"
+          exit 1
+        fi
+        
+        # Check plugin ID matches package.json
+        PLUGIN_ID=$(jq -r '.id' dist/plugin.json)
+        PACKAGE_NAME=$(jq -r '.name' package.json)
+        
+        if [ "$PLUGIN_ID" != "$PACKAGE_NAME" ]; then
+          echo "❌ Plugin ID ($PLUGIN_ID) doesn't match package name ($PACKAGE_NAME)"
+          exit 1
+        fi
+        
+        # Check module.js is not empty
+        if [ ! -s "dist/module.js" ]; then
+          echo "❌ module.js is empty"
+          exit 1
+        fi
+        
+        echo "✅ All build artifacts verified successfully"
+        
+    - name: Test plugin loading (simulation)
+      run: |
+        echo "🧪 Testing plugin structure..."
+        
+        # Simulate plugin loading by checking for exports
+        if ! grep -q "exports" dist/module.js; then
+          echo "⚠️ Warning: No exports found in module.js"
+        fi
+        
+        # Check for common Grafana panel patterns
+        if ! grep -q "PanelPlugin" dist/module.js; then
+          echo "❌ PanelPlugin not found in module.js"
+          exit 1
+        fi
+        
+        echo "✅ Plugin structure tests passed"
+        
+    - name: Check bundle size
+      run: |
+        echo "📦 Checking bundle size..."
+        
+        BUNDLE_SIZE=$(stat -c%s dist/module.js)
+        MAX_SIZE=2097152  # 2MB limit
+        
+        echo "Bundle size: $BUNDLE_SIZE bytes"
+        
+        if [ $BUNDLE_SIZE -gt $MAX_SIZE ]; then
+          echo "⚠️ Warning: Bundle size ($BUNDLE_SIZE bytes) exceeds recommended limit (2MB)"
+        else
+          echo "✅ Bundle size is within limits"
+        fi
+        
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
         name: plugin-build-${{ github.sha }}
         path: dist/
         retention-days: 30
+
+  security:
+    name: Security & Dependency Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run npm audit
+      run: |
+        echo "🔒 Running security audit..."
+        
+        # Run audit and capture output
+        if npm audit --audit-level=high; then
+          echo "✅ No high-severity vulnerabilities found"
+        else
+          echo "⚠️ High-severity vulnerabilities detected"
+          echo "Running npm audit fix..."
+          
+          # Try to auto-fix
+          if npm audit fix --dry-run; then
+            echo "📝 Auto-fixable vulnerabilities found. Run 'npm audit fix' to resolve."
+          fi
+          
+          # Don't fail CI for audit issues, just warn
+          echo "⚠️ Please review security vulnerabilities"
+        fi
+        
+    - name: Check for known vulnerabilities with Snyk
+      uses: snyk/actions/node@master
+      continue-on-error: true
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --severity-threshold=high
+        
+    - name: Dependency Review
+      uses: actions/dependency-review-action@v4
+      if: github.event_name == 'pull_request'
+      with:
+        fail-on-severity: high
 
   package:
     name: Create Release Package
