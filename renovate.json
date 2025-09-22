@@ -4,6 +4,7 @@
     "config:recommended",
     ":semanticCommitTypeAll(chore)"
   ],
+  "baseBranches": ["develop"],
   "timezone": "Europe/Berlin",
   "schedule": [
     "before 6am on monday"

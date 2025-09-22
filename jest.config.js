@@ -1,5 +1,4 @@
 module.exports = {
-  preset: 'ts-jest',
   testEnvironment: 'jsdom',
   roots: ['<rootDir>/src'],
   testMatch: [
@@ -7,7 +6,8 @@ module.exports = {
     '**/*.(test|spec).+(ts|tsx|js)',
   ],
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': '@swc/jest',
+    '^.+\\.(js|jsx)$': '@swc/jest',
   },
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
@@ -20,6 +20,6 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
   transformIgnorePatterns: [
-    'node_modules/(?!(@grafana/.*\\.mjs$))',
+    'node_modules/(?!((@grafana/.*)|d3-interpolate|d3-color|d3-format|d3-time|d3-time-format|d3-scale|d3-array|ol)/)',
   ],
 };
