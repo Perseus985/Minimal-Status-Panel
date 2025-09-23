@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.1.2...v1.1.3) (2025-09-23)
+
+
+### Bug Fixes
+
+* del plugin signing for private instance use ([49595f6](https://github.com/Perseus985/Minimal-Status-Panel/commit/49595f67e5485f1f6cbfd7c15079301ff4aceddf))
+
 ## [1.1.2](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.1.1...v1.1.2) (2025-09-22)
 
 
