@@ -1,8 +1,5 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.3.0"
-gem "jekyll-remote-theme"
-gem "webrick", "~> 1.7"
-
-# GitHub Pages compatible gems
+# GitHub Pages compatible gems (use this OR jekyll, not both)
 gem "github-pages", group: :jekyll_plugins
+gem "webrick", "~> 1.7"

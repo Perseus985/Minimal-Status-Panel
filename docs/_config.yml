@@ -4,10 +4,11 @@ description: A beautiful Grafana panel plugin for monitoring service status with
 baseurl: "/Minimal-Status-Panel"
 url: "https://perseus985.github.io"
 
-# Theme
-remote_theme: pages-themes/minimal@v0.2.0
+# Use github-pages plugin (includes all necessary plugins)
 plugins:
-  - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 # Navigation
 navbar:
