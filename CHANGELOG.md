@@ -1,3 +1,15 @@
+# [1.2.0-beta.1](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.1.3...v1.2.0-beta.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* version changes in plugin info via semantic release ([ca467e7](https://github.com/Perseus985/Minimal-Status-Panel/commit/ca467e780a422567578628b11a1b8c181895a9e6))
+
+
+### Features
+
+* add super-minimal interface for many many services ([3f2531e](https://github.com/Perseus985/Minimal-Status-Panel/commit/3f2531ebd1990fe3221f47488fddd3b874a93815))
+
 ## [1.1.3](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.1.2...v1.1.3) (2025-09-23)
 
 

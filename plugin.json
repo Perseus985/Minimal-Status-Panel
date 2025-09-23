@@ -10,8 +10,13 @@
       "email": "dev@stellmacher.xyz",
       "url": "https://github.com/Perseus985"
     },
-    "keywords": ["status", "uptime", "health", "monitoring"],
-    "version": "1.0.0",
+    "keywords": [
+      "status",
+      "uptime",
+      "health",
+      "monitoring"
+    ],
+    "version": "1.2.0-beta.1",
     "updated": "2025-09-22",
     "logos": {
       "small": "img/logo.png",
