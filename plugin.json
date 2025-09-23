@@ -7,7 +7,7 @@
     "description": "A status panel that displays service health information similar to Uptime Kuma",
     "author": {
       "name": "Kevin Stellmacher",
-      "email": "kevin@example.com",
+      "email": "dev@stellmacher.xyz",
       "url": "https://github.com/Perseus985"
     },
     "keywords": ["status", "uptime", "health", "monitoring"],
