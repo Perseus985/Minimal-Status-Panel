@@ -1,3 +1,10 @@
+# [1.2.0-beta.2](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2025-09-23)
+
+
+### Bug Fixes
+
+* use newer artifacts for pages ([d0b45f9](https://github.com/Perseus985/Minimal-Status-Panel/commit/d0b45f9806a0087199ab8806b3068aa20575ffc7))
+
 # [1.2.0-beta.1](https://github.com/Perseus985/Minimal-Status-Panel/compare/v1.1.3...v1.2.0-beta.1) (2025-09-23)
 
 
