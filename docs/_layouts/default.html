@@ -8,197 +8,671 @@
     <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
     <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
 
-    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Custom CSS for better styling -->
+    <!-- Apple-inspired Design System -->
     <style>
-      .header-nav {
-        background: #f8f9fa;
-        border-bottom: 1px solid #e9ecef;
-        padding: 1rem 0;
-        margin-bottom: 2rem;
+      :root {
+        --primary-blue: #007AFF;
+        --primary-blue-hover: #0056CC;
+        --secondary-gray: #8E8E93;
+        --background-primary: #FFFFFF;
+        --background-secondary: #F2F2F7;
+        --background-tertiary: #FFFFFF;
+        --text-primary: #000000;
+        --text-secondary: #6C6C70;
+        --text-tertiary: #8E8E93;
+        --border-color: #D1D1D6;
+        --shadow-light: rgba(0, 0, 0, 0.04);
+        --shadow-medium: rgba(0, 0, 0, 0.1);
+        --shadow-heavy: rgba(0, 0, 0, 0.15);
+        --border-radius: 12px;
+        --border-radius-large: 16px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --background-primary: #000000;
+          --background-secondary: #1C1C1E;
+          --background-tertiary: #2C2C2E;
+          --text-primary: #FFFFFF;
+          --text-secondary: #EBEBF5;
+          --text-tertiary: #8E8E93;
+          --border-color: #38383A;
+          --shadow-light: rgba(255, 255, 255, 0.04);
+          --shadow-medium: rgba(255, 255, 255, 0.1);
+          --shadow-heavy: rgba(255, 255, 255, 0.15);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background: var(--background-primary);
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .main-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #F2F2F7 0%, #FFFFFF 100%);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .main-container {
+          background: linear-gradient(135deg, #000000 0%, #1C1C1E 100%);
+        }
+      }
+
+      .header {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .header {
+          background: rgba(28, 28, 30, 0.8);
+        }
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 600;
+        font-size: 20px;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, #5856D6 100%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+      }
+
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--text-primary);
+        cursor: pointer;
+        padding: 8px;
       }
 
       .nav-links {
         display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
+        gap: 8px;
         list-style: none;
-        padding: 0;
         margin: 0;
+        padding: 0;
+        align-items: center;
       }
 
       .nav-links a {
-        color: #007bff;
+        color: var(--text-secondary);
         text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        transition: background-color 0.2s;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 15px;
+        transition: var(--transition);
+        position: relative;
       }
 
       .nav-links a:hover {
-        background-color: #007bff;
-        color: white;
+        color: var(--primary-blue);
+        background: rgba(0, 122, 255, 0.1);
       }
 
       .nav-links a.active {
-        background-color: #007bff;
+        color: var(--primary-blue);
+        background: rgba(0, 122, 255, 0.15);
+        font-weight: 600;
+      }
+
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--background-tertiary);
+        min-width: 200px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 40px var(--shadow-heavy);
+        border: 1px solid var(--border-color);
+        padding: 8px;
+        margin-top: 8px;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .dropdown-content a {
+        display: block;
+        padding: 10px 16px;
+        margin: 0;
+        border-radius: 8px;
+      }
+
+      .content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 48px 24px;
+      }
+
+      .hero {
+        text-align: center;
+        margin-bottom: 80px;
+        padding: 60px 0;
+      }
+
+      .hero h1 {
+        font-size: clamp(36px, 5vw, 64px);
+        font-weight: 700;
+        margin: 0 0 24px 0;
+        background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-size: 20px;
+        color: var(--text-secondary);
+        margin: 0 0 40px 0;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 32px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 24px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: var(--primary-blue);
         color: white;
       }
 
-      .footer {
-        margin-top: 3rem;
-        padding: 2rem 0;
-        border-top: 1px solid #e9ecef;
+      .btn-primary:hover {
+        background: var(--primary-blue-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
+      }
+
+      .btn-secondary {
+        background: var(--background-tertiary);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+      }
+
+      .btn-secondary:hover {
+        background: var(--background-secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px var(--shadow-medium);
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin: 64px 0;
+      }
+
+      .feature-card {
+        background: var(--background-tertiary);
+        border-radius: var(--border-radius-large);
+        padding: 32px;
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px var(--shadow-medium);
+      }
+
+      .feature-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, #5856D6 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+
+      .feature-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        color: var(--text-primary);
+      }
+
+      .feature-description {
+        color: var(--text-secondary);
+        margin: 0;
+      }
+
+      .section {
+        margin: 80px 0;
+      }
+
+      .section-header {
         text-align: center;
-        color: #6c757d;
+        margin-bottom: 48px;
+      }
+
+      .section-title {
+        font-size: 36px;
+        font-weight: 700;
+        margin: 0 0 16px 0;
+        color: var(--text-primary);
+      }
+
+      .section-subtitle {
+        font-size: 18px;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+
+      .image-showcase {
+        background: var(--background-tertiary);
+        border-radius: var(--border-radius-large);
+        padding: 40px;
+        margin: 40px 0;
+        border: 1px solid var(--border-color);
+      }
+
+      .image-showcase img {
+        width: 100%;
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 40px var(--shadow-medium);
+      }
+
+      .footer {
+        background: var(--background-secondary);
+        border-top: 1px solid var(--border-color);
+        padding: 64px 0 32px;
+        margin-top: 80px;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        text-align: center;
       }
 
       .footer-links {
         display: flex;
         justify-content: center;
-        gap: 2rem;
-        margin-bottom: 1rem;
+        gap: 32px;
+        margin-bottom: 32px;
         flex-wrap: wrap;
       }
 
       .footer-links a {
-        color: #007bff;
+        color: var(--text-secondary);
         text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: var(--transition);
       }
 
       .footer-links a:hover {
-        text-decoration: underline;
+        color: var(--primary-blue);
       }
 
-      .badge {
-        display: inline-block;
-        padding: 0.25rem 0.5rem;
-        margin: 0.125rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        border-radius: 0.25rem;
-        text-decoration: none;
+      .footer-text {
+        color: var(--text-tertiary);
+        font-size: 14px;
       }
 
-      .table-responsive {
+      /* Code blocks */
+      pre, code {
+        background: var(--background-secondary);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+      }
+
+      pre {
+        padding: 20px;
         overflow-x: auto;
+        line-height: 1.5;
       }
 
+      code {
+        padding: 4px 8px;
+        font-size: 14px;
+      }
+
+      /* Tables */
       table {
         width: 100%;
-        margin-bottom: 1rem;
         border-collapse: collapse;
+        background: var(--background-tertiary);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        margin: 24px 0;
       }
 
-      table th,
-      table td {
-        padding: 0.75rem;
-        vertical-align: top;
-        border-top: 1px solid #dee2e6;
-        border-bottom: 1px solid #dee2e6;
+      th, td {
+        padding: 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
       }
 
-      table th {
-        font-weight: bold;
-        background-color: #f8f9fa;
+      th {
+        background: var(--background-secondary);
+        font-weight: 600;
+        color: var(--text-primary);
       }
 
-      .highlight {
-        background-color: #f8f9fa;
-        border-radius: 4px;
-        padding: 1rem;
-        margin: 1rem 0;
-        border-left: 4px solid #007bff;
+      tr:last-child td {
+        border-bottom: none;
       }
 
-      .alert {
-        padding: 1rem;
-        margin: 1rem 0;
-        border-radius: 4px;
-        border-left: 4px solid;
-      }
-
-      .alert-info {
-        background-color: #d1ecf1;
-        border-color: #17a2b8;
-        color: #0c5460;
-      }
-
-      .alert-warning {
-        background-color: #fff3cd;
-        border-color: #ffc107;
-        color: #856404;
-      }
-
-      .alert-success {
-        background-color: #d4edda;
-        border-color: #28a745;
-        color: #155724;
-      }
-
-      /* Mobile responsive adjustments */
+      /* Mobile responsive */
       @media (max-width: 768px) {
+        .nav-toggle {
+          display: block;
+        }
+
         .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: var(--background-tertiary);
+          border-top: 1px solid var(--border-color);
+          flex-direction: column;
+          padding: 16px;
+          gap: 4px;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .nav-links a {
+          padding: 16px;
+          border-radius: var(--border-radius);
+        }
+
+        .dropdown-content {
+          position: static;
+          display: block;
+          box-shadow: none;
+          border: none;
+          background: transparent;
+          padding: 0;
+          margin: 0;
+        }
+
+        .dropdown-content a {
+          padding-left: 32px;
+          background: var(--background-secondary);
+          margin: 4px 0;
+        }
+
+        .hero {
+          padding: 32px 0;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-buttons {
           flex-direction: column;
           align-items: center;
         }
 
-        .footer-links {
-          flex-direction: column;
-          gap: 1rem;
+        .btn {
+          width: 100%;
+          max-width: 280px;
         }
+
+        .content {
+          padding: 32px 16px;
+        }
+
+        .header-content {
+          padding: 16px;
+        }
+      }
+
+      /* Smooth animations */
+      .animate-in {
+        animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      @keyframes slideInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Badge styles */
+      .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: rgba(0, 122, 255, 0.1);
+        color: var(--primary-blue);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin: 2px;
+        text-decoration: none;
+      }
+
+      .status-indicators {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 24px 0;
       }
     </style>
   </head>
 
   <body>
-    <div class="container-lg px-3 my-5 markdown-body">
-      <!-- Navigation Header -->
-      <nav class="header-nav">
-        <ul class="nav-links">
-          <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a></li>
-          <li><a href="{{ '/getting-started' | relative_url }}" {% if page.url contains 'getting-started' %}class="active"{% endif %}>Getting Started</a></li>
-          <li><a href="{{ '/configuration' | relative_url }}" {% if page.url contains 'configuration' %}class="active"{% endif %}>Configuration</a></li>
-          <li><a href="{{ '/display-modes' | relative_url }}" {% if page.url contains 'display-modes' %}class="active"{% endif %}>Display Modes</a></li>
-          <li><a href="{{ '/advanced-usage' | relative_url }}" {% if page.url contains 'advanced-usage' %}class="active"{% endif %}>Advanced Usage</a></li>
-          <li><a href="{{ '/api-reference' | relative_url }}" {% if page.url contains 'api-reference' %}class="active"{% endif %}>API Reference</a></li>
-          <li><a href="{{ '/faq' | relative_url }}" {% if page.url contains 'faq' %}class="active"{% endif %}>FAQ</a></li>
-        </ul>
-      </nav>
+    <div class="main-container">
+      <!-- Header with Apple-inspired design -->
+      <header class="header">
+        <div class="header-content">
+          <a href="{{ '/' | relative_url }}" class="logo">
+            <div class="logo-icon">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <span>Minimal Status Panel</span>
+          </a>
+
+          <button class="nav-toggle" onclick="toggleNav()">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <nav class="nav-links" id="nav-links">
+            <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
+            <a href="{{ '/getting-started' | relative_url }}" {% if page.url contains 'getting-started' %}class="active"{% endif %}>Getting Started</a>
+            <a href="{{ '/configuration' | relative_url }}" {% if page.url contains 'configuration' %}class="active"{% endif %}>Configuration</a>
+            <a href="{{ '/display-modes' | relative_url }}" {% if page.url contains 'display-modes' %}class="active"{% endif %}>Display Modes</a>
+            <a href="{{ '/advanced-usage' | relative_url }}" {% if page.url contains 'advanced-usage' %}class="active"{% endif %}>Advanced Usage</a>
+            <a href="{{ '/api-reference' | relative_url }}" {% if page.url contains 'api-reference' %}class="active"{% endif %}>API Reference</a>
+            <a href="{{ '/faq' | relative_url }}" {% if page.url contains 'faq' %}class="active"{% endif %}>FAQ</a>
+
+            <!-- Internal Documentation Dropdown -->
+            <div class="dropdown">
+              <a href="#" {% if page.url contains 'internal' %}class="active"{% endif %}>
+                Internal Docs <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+              </a>
+              <div class="dropdown-content">
+                <a href="{{ '/internal/contributing' | relative_url }}">
+                  <i class="fas fa-code-branch"></i> Contributing Guide
+                </a>
+                <a href="{{ '/internal/github-setup' | relative_url }}">
+                  <i class="fab fa-github"></i> GitHub Setup
+                </a>
+                <a href="{{ '/internal/plugin-signing' | relative_url }}">
+                  <i class="fas fa-certificate"></i> Plugin Signing
+                </a>
+                <a href="{{ '/internal/renovate-fix' | relative_url }}">
+                  <i class="fas fa-robot"></i> Renovate Fix
+                </a>
+                <a href="{{ '/internal/validation-checklist' | relative_url }}">
+                  <i class="fas fa-check-square"></i> Validation Checklist
+                </a>
+                <a href="{{ '/internal/testing-guide' | relative_url }}">
+                  <i class="fas fa-vials"></i> Testing Guide
+                </a>
+                <a href="{{ '/internal/automatic-testing' | relative_url }}">
+                  <i class="fas fa-cogs"></i> Automatic Testing
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
 
       <!-- Page Content -->
-      {{ content }}
+      <main class="content">
+        {{ content }}
+      </main>
 
-      <!-- Footer -->
+      <!-- Apple-inspired Footer -->
       <footer class="footer">
-        <div class="footer-links">
-          <a href="https://github.com/Perseus985/Minimal-Status-Panel">
-            <i class="fab fa-github"></i> GitHub Repository
-          </a>
-          <a href="https://github.com/Perseus985/Minimal-Status-Panel/releases">
-            <i class="fas fa-download"></i> Download Plugin
-          </a>
-          <a href="https://github.com/Perseus985/Minimal-Status-Panel/issues">
-            <i class="fas fa-bug"></i> Report Issues
-          </a>
-          <a href="https://grafana.com">
-            <i class="fas fa-chart-line"></i> Grafana
-          </a>
-        </div>
-        <div>
-          <p>
-            <strong>Minimal Status Panel</strong> - A beautiful Grafana panel plugin for service status monitoring
-          </p>
-          <p>
-            Built with ❤️ for the Grafana community | MIT License |
-            <a href="https://github.com/Perseus985/Minimal-Status-Panel">View on GitHub</a>
-          </p>
+        <div class="footer-content">
+          <div class="footer-links">
+            <a href="https://github.com/Perseus985/Minimal-Status-Panel">
+              <i class="fab fa-github"></i> GitHub Repository
+            </a>
+            <a href="https://github.com/Perseus985/Minimal-Status-Panel/releases">
+              <i class="fas fa-download"></i> Download Plugin
+            </a>
+            <a href="https://github.com/Perseus985/Minimal-Status-Panel/issues">
+              <i class="fas fa-bug"></i> Report Issues
+            </a>
+            <a href="https://grafana.com">
+              <i class="fas fa-chart-line"></i> Grafana
+            </a>
+          </div>
+          <div class="footer-text">
+            <p>
+              <strong>Minimal Status Panel</strong> - A beautiful Grafana panel plugin for service status monitoring
+            </p>
+            <p>
+              Built with ❤️ for the Grafana community | MIT License |
+              <a href="https://github.com/Perseus985/Minimal-Status-Panel" style="color: var(--primary-blue);">View on GitHub</a>
+            </p>
+          </div>
         </div>
       </footer>
     </div>
+
+    <!-- Mobile navigation toggle script -->
+    <script>
+      function toggleNav() {
+        const navLinks = document.getElementById('nav-links');
+        navLinks.classList.toggle('active');
+      }
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.getElementById('nav-links').classList.remove('active');
+        });
+      });
+
+      // Add smooth animations on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.feature-card, .section, .image-showcase').forEach(el => {
+          observer.observe(el);
+        });
+      });
+    </script>
 
     <!-- Analytics (if configured) -->
     {% if site.google_analytics %}
