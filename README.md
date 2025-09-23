@@ -27,6 +27,13 @@ A beautiful Grafana panel plugin that displays service status information with a
 
 ### 📸 **Display Modes**
 
+#### **Super Minimal View**
+Ultra-clean display with maximum simplicity:
+
+<div align="center">
+  <img src="img/super-minimal.png" alt="Super Minimal View Example" width="600">
+</div>
+
 #### **Minimal View**
 Clean, compact display showing just the essentials:
 
