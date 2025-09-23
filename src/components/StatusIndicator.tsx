@@ -60,14 +60,44 @@ export const StatusIndicator: React.FC<StatusIndicatorProps> = ({ service, optio
 
   if (displayMode === 'compact') {
     return (
-      <div 
-        className={styles.compactIndicator} 
+      <div
+        className={styles.compactIndicator}
         title={`${service.name}: ${service.status}`}
         style={{
           backgroundColor: getStatusColor(service.status, theme),
         }}
       >
         <Icon name={getStatusIcon(service.status)} size="sm" />
+      </div>
+    );
+  }
+
+  // Ultra-minimal mode: just name and status text
+  if (displayLevel === 'ultra-minimal') {
+    const getStatusText = (status: ServiceStatus['status']) => {
+      switch (status) {
+        case 'up':
+          return 'Up';
+        case 'down':
+          return 'Down';
+        case 'warning':
+          return 'N/A';
+        case 'maintenance':
+          return 'Maintenance';
+        default:
+          return 'N/A';
+      }
+    };
+
+    return (
+      <div className={styles.ultraMinimalIndicator}>
+        <span className={styles.ultraMinimalName}>{service.name}</span>
+        <span
+          className={styles.ultraMinimalStatus}
+          style={{ color: getStatusColor(service.status, theme) }}
+        >
+          {getStatusText(service.status)}
+        </span>
       </div>
     );
   }
@@ -350,13 +380,48 @@ const getStyles = (theme: GrafanaTheme2, displayMode: 'list' | 'grid' | 'compact
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s ease;
-    
+
     &:hover {
       transform: scale(1.05);
     }
-    
+
     svg {
       color: white !important;
     }
+  `,
+
+  // Ultra-minimal mode
+  ultraMinimalIndicator: css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: ${theme.colors.background.secondary};
+    border: 1px solid ${theme.colors.border.weak};
+    border-radius: 4px;
+    margin-bottom: 4px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: ${theme.colors.background.primary};
+    }
+  `,
+  ultraMinimalName: css`
+    font-size: 14px;
+    font-weight: 500;
+    color: ${theme.colors.text.primary};
+    flex: 1;
+    margin-right: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
+  ultraMinimalStatus: css`
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 60px;
+    text-align: right;
   `,
 });

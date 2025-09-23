@@ -27,4 +27,20 @@ describe('Plugin Configuration', () => {
     expect(defaultOptions.showUrls).toBe(true);
     expect(typeof defaultOptions.customNames).toBe('string');
   });
+
+  it('should support ultra-minimal display level', () => {
+    const ultraMinimalOptions: StatusPanelOptions = {
+      displayMode: 'list',
+      displayLevel: 'ultra-minimal',
+      showLabels: true,
+      showLastCheck: true,
+      showResponseTime: true,
+      showUrls: true,
+      maxItems: 20,
+      refreshInterval: 30,
+      customNames: '{}'
+    };
+
+    expect(ultraMinimalOptions.displayLevel).toBe('ultra-minimal');
+  });
 });

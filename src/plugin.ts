@@ -26,6 +26,7 @@ export const plugin = new PanelPlugin<StatusPanelOptions>(StatusPanel).setPanelO
         options: [
           { value: 'minimal', label: 'Minimal (Header + Heartbeat only)' },
           { value: 'full', label: 'Full (Header + Heartbeat + Stats)' },
+          { value: 'ultra-minimal', label: 'Ultra-Minimal (Name + Status only)' },
         ],
       },
     })

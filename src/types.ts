@@ -2,7 +2,7 @@ import { PanelData, TimeRange } from '@grafana/data';
 
 export interface StatusPanelOptions {
   displayMode: 'list' | 'grid' | 'compact';
-  displayLevel: 'minimal' | 'full';
+  displayLevel: 'minimal' | 'full' | 'ultra-minimal';
   showLabels: boolean;
   showLastCheck: boolean;
   showResponseTime: boolean;
