@@ -111,16 +111,14 @@
         text-decoration: none;
       }
 
-      .logo-icon {
+      .logo-image {
         width: 32px;
         height: 32px;
-        background: linear-gradient(135deg, var(--primary-blue) 0%, #5856D6 100%);
         border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 16px;
+        object-fit: contain;
+        background: var(--background-tertiary);
+        padding: 2px;
+        box-shadow: 0 2px 8px var(--shadow-light);
       }
 
       .nav-toggle {
@@ -551,9 +549,7 @@
       <header class="header">
         <div class="header-content">
           <a href="{{ '/' | relative_url }}" class="logo">
-            <div class="logo-icon">
-              <i class="fas fa-heartbeat"></i>
-            </div>
+            <img src="{{ '/img/logo.png' | relative_url }}" alt="Minimal Status Panel Logo" class="logo-image">
             <span>Minimal Status Panel</span>
           </a>
 
