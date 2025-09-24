@@ -391,21 +391,86 @@
 
       /* Code blocks */
       pre, code {
-        background: var(--background-secondary);
-        border-radius: 8px;
+        background: #1e1e1e;
+        color: #d4d4d4;
+        border-radius: 12px;
         border: 1px solid var(--border-color);
-        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      }
+
+      @media (prefers-color-scheme: light) {
+        pre, code {
+          background: #f6f8fa;
+          color: #24292f;
+          border: 1px solid #d1d9e0;
+        }
       }
 
       pre {
-        padding: 20px;
+        padding: 24px;
         overflow-x: auto;
-        line-height: 1.5;
+        line-height: 1.6;
+        margin: 24px 0;
+        font-size: 14px;
+        white-space: pre;
+        word-wrap: normal;
+        box-shadow: 0 4px 16px var(--shadow-light);
       }
 
       code {
         padding: 4px 8px;
-        font-size: 14px;
+        font-size: 13px;
+        white-space: pre;
+      }
+
+      /* Inline code styling */
+      p code, li code, td code {
+        background: rgba(0, 122, 255, 0.1);
+        color: var(--primary-blue);
+        border: 1px solid rgba(0, 122, 255, 0.2);
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 13px;
+      }
+
+      /* Code block with language highlighting */
+      .highlight {
+        background: transparent !important;
+        margin: 24px 0;
+      }
+
+      .highlight pre {
+        background: #1e1e1e;
+        margin: 0;
+        border: 1px solid #333;
+      }
+
+      @media (prefers-color-scheme: light) {
+        .highlight pre {
+          background: #f6f8fa;
+          border: 1px solid #d1d9e0;
+        }
+
+        p code, li code, td code {
+          background: rgba(0, 122, 255, 0.08);
+        }
+      }
+
+      /* Better code block container */
+      .code-container {
+        position: relative;
+        margin: 24px 0;
+      }
+
+      .code-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-blue), #5856D6);
+        border-radius: 12px 12px 0 0;
       }
 
       /* Tables */
