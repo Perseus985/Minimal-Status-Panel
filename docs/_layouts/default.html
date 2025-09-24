@@ -76,49 +76,55 @@
       }
 
       .header {
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
         position: sticky;
         top: 0;
         z-index: 1000;
         padding: 0;
+        transition: var(--transition);
       }
 
       @media (prefers-color-scheme: dark) {
         .header {
-          background: rgba(28, 28, 30, 0.8);
+          background: rgba(0, 0, 0, 0.8);
+          border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
         }
       }
 
       .header-content {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 16px 24px;
+        padding: 8px 24px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        min-height: 44px;
       }
 
       .logo {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 8px;
         font-weight: 600;
-        font-size: 20px;
+        font-size: 17px;
         color: var(--text-primary);
         text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .logo:hover {
+        opacity: 0.8;
       }
 
       .logo-image {
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
         object-fit: contain;
-        background: var(--background-tertiary);
-        padding: 2px;
-        box-shadow: 0 2px 8px var(--shadow-light);
+        transition: var(--transition);
       }
 
       .nav-toggle {
@@ -133,7 +139,7 @@
 
       .nav-links {
         display: flex;
-        gap: 8px;
+        gap: 4px;
         list-style: none;
         margin: 0;
         padding: 0;
@@ -143,22 +149,23 @@
       .nav-links a {
         color: var(--text-secondary);
         text-decoration: none;
-        padding: 8px 16px;
-        border-radius: 20px;
+        padding: 6px 12px;
+        border-radius: 16px;
         font-weight: 500;
-        font-size: 15px;
+        font-size: 14px;
         transition: var(--transition);
         position: relative;
+        white-space: nowrap;
       }
 
       .nav-links a:hover {
         color: var(--primary-blue);
-        background: rgba(0, 122, 255, 0.1);
+        background: rgba(0, 122, 255, 0.08);
       }
 
       .nav-links a.active {
         color: var(--primary-blue);
-        background: rgba(0, 122, 255, 0.15);
+        background: rgba(0, 122, 255, 0.12);
         font-weight: 600;
       }
 
