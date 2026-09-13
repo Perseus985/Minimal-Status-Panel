@@ -11,12 +11,12 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       
     - name: Setup Node.js
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v7
       with:
-        node-version: '22'
+        node-version: '24'
         cache: 'npm'
         
     - name: Install dependencies
@@ -45,7 +45,7 @@ jobs:
         echo "### Total dist size: $(du -sh dist | cut -f1)" >> $GITHUB_STEP_SUMMARY
         
     - name: Upload PR build artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: pr-build-${{ github.event.number }}
         path: dist/
@@ -59,7 +59,7 @@ jobs:
     
     steps:
     - name: Comment PR
-      uses: actions/github-script@v8
+      uses: actions/github-script@v9
       with:
         script: |
           github.rest.issues.createComment({
