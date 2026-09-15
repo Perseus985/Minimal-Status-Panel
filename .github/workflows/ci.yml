@@ -20,12 +20,12 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       
     - name: Setup Node.js
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v7
       with:
-        node-version: '22'
+        node-version: '24'
         cache: 'npm'
         
     - name: Install dependencies
@@ -41,7 +41,7 @@ jobs:
       run: npm run test:ci
       
     - name: Upload coverage reports
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v7
       if: success()
       with:
         fail_ci_if_error: false
@@ -53,12 +53,12 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       
     - name: Setup Node.js
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v7
       with:
-        node-version: '22'
+        node-version: '24'
         cache: 'npm'
         
     - name: Install dependencies
@@ -138,7 +138,7 @@ jobs:
         fi
         
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: plugin-build-${{ github.sha }}
         path: dist/
@@ -150,12 +150,12 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       
     - name: Setup Node.js
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v7
       with:
-        node-version: '22'
+        node-version: '24'
         cache: 'npm'
         
     - name: Install dependencies
@@ -190,7 +190,7 @@ jobs:
         args: --severity-threshold=high
         
     - name: Dependency Review
-      uses: actions/dependency-review-action@v4
+      uses: actions/dependency-review-action@v5.0.0
       if: github.event_name == 'pull_request'
       with:
         fail-on-severity: high
@@ -203,12 +203,12 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       
     - name: Setup Node.js
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v7
       with:
-        node-version: '22'
+        node-version: '24'
         cache: 'npm'
         
     - name: Install dependencies
